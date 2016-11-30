@@ -404,6 +404,7 @@ def github():
             state, repo_label = find_state(info['sha'])
         except ValueError:
             return 'OK'
+        lazy_debug(logger, lambda: 'base ref: {}'.format(state.base_ref))
 
         status_name = ""
         if 'status' in repo_cfg:
@@ -411,12 +412,15 @@ def github():
                 if 'context' in value and value['context'] == info['context']:
                     status_name = name
         if status_name is "":
+            lazy_debug(logger, lambda: 'status not found: {}'.format(info['context']))
             return 'OK'
 
         if info['state'] == 'pending':
+            lazy_debug(logger, lambda: 'pending, returning')
             return 'OK'
 
         for row in info['branches']:
+            lazy_debug(logger, lambda: 'row name: {}'.format(row['name']))
             if row['name'] == state.base_ref:
                 return 'OK'
 
