@@ -520,7 +520,7 @@ def parse_commands(body, username, repo_cfg, state, my_username, db, states,
                               realtime)
 
         elif word == 'retry' and realtime:
-            if not _try_auth_verified():
+            if not _try_auth_verified:
                 continue
             retry(state)
 
@@ -570,7 +570,7 @@ def parse_commands(body, username, repo_cfg, state, my_username, db, states,
                         if not _reviewer_auth_verified():
                             continue
                     else:
-                        if not _try_auth_verified():
+                        if not _try_auth_verified:
                             continue
                     hook_found = True
                     extra_data = ""
