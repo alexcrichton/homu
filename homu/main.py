@@ -496,7 +496,7 @@ def parse_commands(body, username, repo_cfg, state, my_username, db, states,
         elif word.startswith('p='):
             if not _try_auth_verified:
                 continue
-            if not set_priority(state, word[len('p='):], global_cfg):
+            if not set_priority(state, False, word[len('p='):], global_cfg):
                 continue
 
         elif word.startswith('delegate='):
